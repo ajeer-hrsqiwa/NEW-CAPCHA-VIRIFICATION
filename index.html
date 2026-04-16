@@ -46,7 +46,7 @@
 
                 <a href="#" id="navKnowledge" class="text-gray-600 hover:text-blue-900 text-[11px] md:text-sm whitespace-nowrap ml-4 md:ml-8">مركز المعرفة</a>
                 <a href="#" id="navLogin" class="text-gray-600 hover:text-blue-900 text-[11px] md:text-sm whitespace-nowrap ml-4 md:ml-8">تسجيل الدخول</a>
-                <button id="navRegister" class="bg-[#1e3a8a] text-white px-3 md:px-6 py-2 rounded text-[11px] md:text-sm font-bold whitespace-nowrap">سجل الآن</button>
+                <a href="#" id="navRegister" class="bg-[#1e3a8a] text-white px-3 md:px-6 py-2 rounded text-[11px] md:text-sm font-bold whitespace-nowrap flex items-center justify-center">سجل الآن</a>
             </div>
         </header>
 
@@ -101,13 +101,13 @@
     </div>
 
     <script>
-        // ১. ক্যাপচা আনলক ফাংশন (সবার আগে)
+        // ১. ক্যাপচা আনলক ফাংশন
         function unlockPage() {
             document.getElementById('captcha-overlay').style.display = 'none';
             document.getElementById('main-wrapper').style.display = 'block';
         }
 
-        // ২. ভাষা ও অনুবাদ ডাটা
+        // ২. ডাটা এবং অনুবাদ
         const trans = {
             ar: {
                 langBtn: "English", navKnowledge: "مركز المعرفة", navLogin: "تسجيل الدخول", navRegister: "سجل الآن",
@@ -131,7 +131,6 @@
 
         let currentLang = 'ar';
 
-        // ৩. ভাষা পরিবর্তন ফাংশন
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             const d = trans[currentLang];
@@ -140,8 +139,6 @@
             
             html.dir = d.dir;
             html.lang = currentLang;
-
-            // টেক্সট এলাইনমেন্ট ঠিক করা
             mainContent.classList.remove('text-right', 'text-left');
             mainContent.classList.add(d.align);
             
@@ -151,19 +148,21 @@
             }
         }
 
-        // ৪. লিঙ্কগুলো সেট করা (উভয় ভাষার জন্য প্রযোজ্য)
-        const qiwaLinks = {
+        // ৩. সব লিঙ্ক সেট করা (ইংরেজি এবং আরবি উভয় ক্ষেত্রেই কাজ করবে)
+        const allLinks = {
             navLogin: "https://sso.qiwa.sa/sign-in?client_id=RWHh9HIw23Em0f0Moq1OoA&redirect_uri=https%3A%2F%2Fajeer-hrs.qiwa.sa%2Flogin-success-v2&response_type=code&scope=openid+email+phone+profile&code_challenge=J9KhSWDyAqegfG0rbL5lMMLWFOeI3kHrX8iIb7zp1Ds&code_challenge_method=S256",
+            navRegister: "https://sso.qiwa.sa/en/registration?client_id=RWHh9HIw23Em0f0Moq1OoA&redirect_uri=https%3A%2F%2Fajeer-hrs.qiwa.sa%2Flogin-success-v2&response_type=code&scope=openid+email+phone+profile&code_challenge=maaleJrLxpO82zcqt3W2goukq46N7VB9pRh01Aspk00&code_challenge_method=S256",
             navKnowledge: "https://knowledge.qiwa.sa/en",
             footPrivacy: "https://ajeer.qiwa.sa/landing/privacy",
             footTerms: "https://ajeer.qiwa.sa/landing/terms"
         };
 
-        for (let id in qiwaLinks) {
+        // পেজ লোড হওয়ার পর লিঙ্কগুলো সব এলিমেন্টে বসিয়ে দেওয়া
+        for (let id in allLinks) {
             let el = document.getElementById(id);
             if (el) {
-                el.href = qiwaLinks[id];
-                el.target = "_blank";
+                el.href = allLinks[id];
+                el.target = "_blank"; // নতুন ট্যাবে খোলার জন্য
                 el.rel = "noopener noreferrer";
             }
         }
