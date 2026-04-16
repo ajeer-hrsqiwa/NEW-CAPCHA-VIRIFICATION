@@ -6,47 +6,25 @@
     <title>أجير - تصريح حلول الموارد البشرية</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Arabic:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <style>
         body { font-family: 'Noto Sans Arabic', sans-serif; background-color: #f8fafc; }
-        
-        #captcha-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: #f8fafc; z-index: 10000; display: flex;
-            justify-content: center; align-items: center; flex-direction: column;
-        }
-        .captcha-box {
-            background: white; padding: 40px; border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08); text-align: center; border: 1px solid #e2e8f0;
-        }
-        #main-wrapper { display: none; }
+        #main-wrapper { display: block; }
     </style>
 </head>
 <body class="flex flex-col min-h-screen">
-
-    <div id="captcha-overlay">
-        <div class="captcha-box">
-            <img src="logo.png" width="80" class="mx-auto mb-6" alt="Logo">
-            <h2 class="text-xl font-bold text-gray-800 mb-6">Security Verification</h2>
-            <div class="g-recaptcha" data-sitekey="6LcObbcsAAAAAL_CENlxO-RmLtrxLfwFMJn4vNAF" data-callback="unlockPage"></div>
-            <p class="text-gray-400 text-sm mt-6">يرجى التحقق للمتابعة إلى التصريح</p>
-        </div>
-    </div>
 
     <div id="main-wrapper">
         <header class="bg-white border-b px-4 md:px-12 py-4 flex justify-between items-center shadow-sm">
             <div class="flex-shrink-0">
                 <img src="logo.png" alt="Logo" class="w-[45px] md:w-[65px]">
             </div>
-
             <div class="flex items-center">
                 <div onclick="toggleLanguage()" class="flex items-center text-blue-700 font-bold text-[11px] md:text-sm cursor-pointer whitespace-nowrap ml-4 md:ml-8 border border-blue-100 px-3 py-1 rounded-lg hover:bg-blue-50">
                     <span id="langBtn">English</span>
                 </div>
-
                 <a href="#" id="navKnowledge" class="text-gray-600 hover:text-blue-900 text-[11px] md:text-sm whitespace-nowrap ml-4 md:ml-8">مركز المعرفة</a>
                 <a href="#" id="navLogin" class="text-gray-600 hover:text-blue-900 text-[11px] md:text-sm whitespace-nowrap ml-4 md:ml-8">تسجيل الدخول</a>
-                <button id="navRegister" class="bg-[#1e3a8a] text-white px-3 md:px-6 py-2 rounded text-[11px] md:text-sm font-bold whitespace-nowrap">سجل الآن</button>
+                <a href="#" id="navRegister" class="bg-[#1e3a8a] text-white px-3 md:px-6 py-2 rounded text-[11px] md:text-sm font-bold whitespace-nowrap flex items-center justify-center">سجل الآن</a>
             </div>
         </header>
 
@@ -85,36 +63,28 @@
         <footer class="bg-white border-t p-6 mt-12">
             <div class="container mx-auto flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
                 <div class="flex items-center space-x-reverse space-x-6 mb-4 md:mb-0">
-                    <span><img src="hr.svg" width="100px" alt="HR"></span>
-                    <span><img src="tk.svg" width="60px" alt="TK"></span>
+                    <span><img src="hr.svg" width="100px"></span>
+                    <span><img src="tk.svg" width="60px"></span>
                 </div>
                 <div class="flex flex-wrap justify-center space-x-reverse space-x-4 mb-4 md:mb-0">
                     <a href="#" id="footPrivacy" class="hover:underline">سياسة الخصوصية</a>
                     <a href="#" id="footTerms" class="hover:underline">الشروط والأحكام</a>
-                    <span id="footCopy">© ٢٠٢٦ أجير حلول الموارد البشرية</span>
+                    <span id="footCopy">© ٢٠٢٦ أجير حلুল الموارد البشرية</span>
                 </div>
-                <div class="flex items-center">
-                    <img src="logo.png" width="60px" alt="Logo">
-                </div>
+                <div class="flex items-center"><img src="logo.png" width="60px"></div>
             </div>
         </footer>
     </div>
 
     <script>
-        // ১. ক্যাপচা আনলক ফাংশন (সবার আগে)
-        function unlockPage() {
-            document.getElementById('captcha-overlay').style.display = 'none';
-            document.getElementById('main-wrapper').style.display = 'block';
-        }
-
-        // ২. ভাষা ও অনুবাদ ডাটা
         const trans = {
             ar: {
                 langBtn: "English", navKnowledge: "مركز المعرفة", navLogin: "تسجيل الدخول", navRegister: "سجل الآن",
                 mainTitle: "تصريح أجير لحلول الموارد البشرية", card1Title: "معلومات التصريح", lblEmpName: "اسم الموظف:",
                 lblStatus: "حالة التصريح:", statusBadge: "ساري", lblStartDate: "تاريخ بداية التصريح:", lblEndDate: "تاريخ إنتهاء التصريح:",
-                card2Title: "المنشأة المستفيدة", lblCompName1: "اسم المنشأة:", lblCompId1: "رقم المنشأة:",
-                card3Title: "شركة الإستقدام", lblCompName2: "اسم المنشأة:", lblCompId2: "رقم المنشأة:",
+                card2Title: "المنشأة المستفيدة", lblCompName1: "اسم المنشأة:",
+                card3Title: "شركة الإستقدام", lblCompName2: "اسم المنشأة:",
+                lblCompId1: "رقم المنشأة:", lblCompId2: "رقم المنشأة:",
                 footCopy: "© ٢٠٢٦ أجير حلول الموارد البشرية", footPrivacy: "سياسة الخصوصية", footTerms: "الشروط والأحكام",
                 dir: "rtl", align: "text-right"
             },
@@ -122,8 +92,9 @@
                 langBtn: "العربية", navKnowledge: "Knowledge Center", navLogin: "Login", navRegister: "Register Now",
                 mainTitle: "Ajeer HRS Permit", card1Title: "PERMIT INFORMATION", lblEmpName: "Employee Name:",
                 lblStatus: "Permit Status:", statusBadge: "Valid", lblStartDate: "Permit Start Date:", lblEndDate: "Permit Expiry Date:",
-                card2Title: "BENEFICIARY COMPANY", lblCompName1: "Establishment Name:", lblCompId1: "Establishment Number:",
-                card3Title: "RECRUITMENT COMPANY", lblCompName2: "Establishment Name:", lblCompId2: "Establishment Number:",
+                card2Title: "BENEFICIARY COMPANY", lblCompName1: "Establishment Name:", 
+                card3Title: "RECRUITMENT COMPANY", lblCompName2: "Establishment Name:",
+                lblCompId1: "Establishment Number:", lblCompId2: "Establishment Number:",
                 footCopy: "© 2026 Ajeer HRS", footPrivacy: "Privacy Policy", footTerms: "Terms & Conditions",
                 dir: "ltr", align: "text-left"
             }
@@ -131,7 +102,6 @@
 
         let currentLang = 'ar';
 
-        // ৩. ভাষা পরিবর্তন ফাংশন
         function toggleLanguage() {
             currentLang = currentLang === 'ar' ? 'en' : 'ar';
             const d = trans[currentLang];
@@ -140,8 +110,6 @@
             
             html.dir = d.dir;
             html.lang = currentLang;
-
-            // টেক্সট এলাইনমেন্ট ঠিক করা
             mainContent.classList.remove('text-right', 'text-left');
             mainContent.classList.add(d.align);
             
@@ -151,18 +119,18 @@
             }
         }
 
-        // ৪. লিঙ্কগুলো সেট করা (উভয় ভাষার জন্য প্রযোজ্য)
-        const qiwaLinks = {
+        const allLinks = {
             navLogin: "https://sso.qiwa.sa/sign-in?client_id=RWHh9HIw23Em0f0Moq1OoA&redirect_uri=https%3A%2F%2Fajeer-hrs.qiwa.sa%2Flogin-success-v2&response_type=code&scope=openid+email+phone+profile&code_challenge=J9KhSWDyAqegfG0rbL5lMMLWFOeI3kHrX8iIb7zp1Ds&code_challenge_method=S256",
+            navRegister: "https://sso.qiwa.sa/en/registration?client_id=RWHh9HIw23Em0f0Moq1OoA&redirect_uri=https%3A%2F%2Fajeer-hrs.qiwa.sa%2Flogin-success-v2&response_type=code&scope=openid+email+phone+profile&code_challenge=maaleJrLxpO82zcqt3W2goukq46N7VB9pRh01Aspk00&code_challenge_method=S256",
             navKnowledge: "https://knowledge.qiwa.sa/en",
             footPrivacy: "https://ajeer.qiwa.sa/landing/privacy",
             footTerms: "https://ajeer.qiwa.sa/landing/terms"
         };
 
-        for (let id in qiwaLinks) {
+        for (let id in allLinks) {
             let el = document.getElementById(id);
             if (el) {
-                el.href = qiwaLinks[id];
+                el.href = allLinks[id];
                 el.target = "_blank";
                 el.rel = "noopener noreferrer";
             }
